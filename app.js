@@ -11,9 +11,22 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
+app.use('*/css', express.static("public/css"));
 
 
-app.listen(3000, () =>   {
+app.get("/", (req, res) => {
+    res.render('home', {homeContent: homeStartingContent});
+});
+
+
+app.get("/about", (req, res) => {
+    res.render('about', {about: aboutContent});
+});
+
+
+app.get('/contact', (req, res) => {
+    res.render('contact', {contact: contactContent});
+})
+app.listen(3000, () => {
     console.log("Server started on port 3000");
 });
